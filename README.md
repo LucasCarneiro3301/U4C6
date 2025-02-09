@@ -66,7 +66,7 @@ Os LED verde e azul alternam de estado (aceso ou apagado) conforme cada botão. 
 
 ### 4. Interrupções
 
-O programa implementa interrupção nos botões A e B. Dessa forma, não é necessário ler continuamente o estado de cada botão. A função do **Botão A** só é executada se o estado dos LEDs estiver definido como falso (desligado).
+O programa implementa interrupção nos botões A e B. Dessa forma, não é necessário ler continuamente o estado de cada botão.
 
 ### 5. Deboucing
 

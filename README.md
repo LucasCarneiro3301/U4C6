@@ -24,6 +24,8 @@ __Para este trabalho, os seguintes componentes e ferramentas se fazem necessári
 9) Cabo USB para comunicação serial
 10) Ferramenta educacional BitDogLab.
 
+__O resultado do projeto pode ser assistido através deste link: [U4C6 - Introdução às Interfaces de Comunicação Serial com RP2040](https://www.youtube.com/watch?v=68RCjanYeNk).__
+
 ## Instruções de Uso
 
 ### 1. Clone o repositório

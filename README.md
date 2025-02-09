@@ -11,7 +11,7 @@ Este projeto implementa a comunicação entre um _display_ SSD1306, LEDs WS2812 
 Os botões A e B controlam os LEDs RGB verde e azul, respectivamente, com estados alternados por interrupções (IRQ) e tratamento de bouncing via software.
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/f689b94c-6a86-4fca-ae64-09a3f66e44d8" alt="GIF demonstrativo" width="400"/>
+  <img src="https://github.com/user-attachments/assets/3f5fca4a-7a82-45b3-a54a-49796904e402" alt="GIF demonstrativo" width="400"/>
 </div>
 
 __Para este trabalho, os seguintes componentes e ferramentas se fazem necessários:__

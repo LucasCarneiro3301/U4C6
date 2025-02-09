@@ -161,6 +161,7 @@ void ssd1306_draw_char(ssd1306_t *ssd, char character, uint8_t x, uint8_t y) {
   else if (character >= 'A' && character <= 'Z') index = (character - 'A' + 11) * 8; // Para letras maiúsculas
   else  if (character >= '0' && character <= '9') index = (character - '0' + 1) * 8; // Para números
   else  if (character == ':') index = (character - ':' + 63) * 8; // Para dois pontos
+  else  if (character == '*') index = (character - '*' + 64) * 8; // Para asterico
 
   for (uint8_t i = 0; i < col; ++i) {
     uint8_t line = font[index + i];

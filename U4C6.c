@@ -18,13 +18,7 @@
 #define I2C_SCL 15 // Define que o pino GPIO 15 será usado como SCL (linha de clock do I2C)
 #define endereco 0x3C // Define o endereço I2C do dispositivo (0x3C é o endereço padrão de muitos displays OLED SSD1306)
 
-
-#define UART_ID uart0 // Seleciona a UART0
-#define BAUD_RATE 115200 // Define a taxa de transmissão
-
 #define WS2812_PIN 7 // Matriz de LEDs 5x5
-#define UART_TX_PIN 0 // Pino GPIO usado para TX
-#define UART_RX_PIN 1 // Pino GPIO usado para RX
 #define BTNA 5 // Botão A
 #define BTNB 6 // Botão B
 const uint green = 11; // LED Verde
@@ -40,7 +34,6 @@ char buffer[16]; // Buffer de string
 static volatile uint32_t last_time = 0; // Armazena o tempo do último evento (em microssegundos)
 
 static void setup(); // Prototipação da função que define os LEDs RGB como saídas e os botões como entradas
-void uart_setup(); // Prototipação da função que configura o UART
 void i2c_setup(); // Prototipação da função que configura o I2C
 void ws2812_setup(PIO pio, uint sm); // Prototipação da função que configura a matriz de LEDs 5x5 
 void ssd1306_setup(ssd1306_t* ssd); // Prototipação da função que configura o display ssd1306
@@ -66,13 +59,20 @@ int main() {
     frame(&ssd); // Gera a interface padrão no display
     int symbol = getchar_timeout_us(50); // Recebe um caractere do teclado
     if (symbol != PICO_ERROR_TIMEOUT) {
-      sprintf(buffer, "%c", symbol); 
-      ssd1306_draw_string(&ssd, buffer, 68, 28); // Insere o símbolo escolhido ao lado da seção "LETRA: "
+      printf("O caractere digitado foi: %c\n\n", (char) symbol);
+      ssd1306_draw_char(&ssd, (char) symbol, 68, 28); // Insere o símbolo escolhido ao lado da seção "LETRA: "
 
       if(symbol >= 48 && symbol <= 57) numbers(symbol - 48); // Caso o símbolo seja um número, este é ilustrado na matriz de LEDs 5x5
       else set_leds_from_color(pio, sm, 0); // Caso contrário, a matriz de LEDs é limpada
     }
+
     ssd1306_send_data(&ssd); // Envia os dados para o display
+
+    if(symbol == '*') {
+      printf("Reiniciando para o modo de gravação!!!\n\n");
+      reset_usb_boot(0,0); // Modo de gravação
+    } 
+
     sleep_ms(10);
   }
 }
@@ -94,13 +94,6 @@ void setup() {
   gpio_init(BTNB);
   gpio_set_dir(BTNB, GPIO_IN);
   gpio_pull_up(BTNB);  
-}
-
-void uart_setup() {
-  uart_init(UART_ID, BAUD_RATE); // Inicializa a UART
-
-  gpio_set_function(UART_TX_PIN, GPIO_FUNC_UART); // Configura o pino 0 para TX
-  gpio_set_function(UART_RX_PIN, GPIO_FUNC_UART); // Configura o pino 1 para RX
 }
 
 // Inicializa e configura a comunicação serial I2C 

@@ -6,9 +6,9 @@ Lucas Carneiro de Araújo Lima
 
 ## ATIVIDADE 
 __Descrição:__
-Este projeto implementa a comunicação entre um _display_ SSD1306, LEDs WS2812 e um monitor serial, permitindo a exibição de caracteres enviados pelo PC e a interação com botões físicos. A biblioteca font.h foi modificada para incluir caracteres minúsculos, melhorando a representação no _display_ 128x64 via I2C. Além disso, números digitados no monitor serial são convertidos em símbolos exibidos na matriz de LEDs WS2812.
+Este projeto implementa a comunicação entre um _display_ SSD1306, LEDs WS2812 e um monitor serial, permitindo a exibição de caracteres enviados pelo PC e a interação com botões físicos. A biblioteca `font.h` foi modificada para incluir caracteres minúsculos, melhorando a representação no _display_ 128x64 via I2C. Além disso, números digitados no monitor serial são convertidos em símbolos exibidos na matriz de LEDs WS2812.
 
-Os botões A e B controlam os LEDs RGB verde e azul, respectivamente, com estados alternados por interrupções (IRQ) e tratamento de bouncing via software.
+Os botões A e B controlam os LEDs RGB verde e azul, respectivamente, com estados alternados por interrupções (IRQ) e tratamento de _bouncing_ via _software_.
 
 <div align="center">
   <img src="https://github.com/user-attachments/assets/3f5fca4a-7a82-45b3-a54a-49796904e402" alt="GIF demonstrativo" width="400"/>
@@ -19,7 +19,7 @@ __Para este trabalho, os seguintes componentes e ferramentas se fazem necessári
 3) Ambiente de trabalho VSCode.
 4) 2 LEDs
 6) 2 Botões Pull-Up
-7) _display_ SSD1306
+7) _Display_ SSD1306
 8) Matriz de LEDs 5x5 WS2812
 9) Cabo USB para comunicação serial
 10) Ferramenta educacional BitDogLab.

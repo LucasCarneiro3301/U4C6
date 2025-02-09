@@ -81,7 +81,7 @@ Foi adicionado padrões para as letras mínusculas na biblioteca `font.h`. Além
 Conectado via I2C, o display conta com a seguinte interface:
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/0563440f-43cf-45f0-8e8a-a38dd1ae435a" alt="GIF demonstrativo" width="400"/>
+  <img src="https://github.com/user-attachments/assets/76f7e683-0953-4a95-86ee-4ec721806d74" alt="GIF demonstrativo" width="400"/>
 </div>
 
 Em que **VERDE:** ilustra o estado atual do LED verde (0 para apagado e 1 para aceso), **AZUL:** ilustra o estado atual do LED azul (0 para apagado e 1 para aceso) e **LETRA:** ilustra o último caractere recebido como entrada.

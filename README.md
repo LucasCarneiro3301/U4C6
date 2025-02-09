@@ -80,13 +80,14 @@ Foi adicionado padrões para as letras mínusculas na biblioteca `font.h`. Além
 
 ### 7. Display SSD1306
 
-Conectado via I2C, o display conta com a seguinte interface:
+Conectado via I2C, o display conta com as seguintes interfaces:
 
-<div align="center">
-  <img src="https://github.com/user-attachments/assets/76f7e683-0953-4a95-86ee-4ec721806d74" alt="GIF demonstrativo" width="400"/>
-</div>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/d8ae130d-d7f9-4646-8505-b73089d56817" alt="GIF demonstrativo" width="400"/>
+  <img src="https://github.com/user-attachments/assets/f96c9e56-d5ac-4c8a-ab8a-2decec5db550" alt="GIF demonstrativo" width="400"/>
+</p>
 
-Em que **VERDE:** ilustra o estado atual do LED verde (0 para apagado e 1 para aceso), **AZUL:** ilustra o estado atual do LED azul (0 para apagado e 1 para aceso) e **LETRA:** ilustra o último caractere recebido como entrada.
+Em que **(1)** é interface que solicita ao usuário para iniciar a conexão USB e **(2)** é interface padrão após a conexão ser estabelecida, em que **VERDE:** ilustra o estado atual do LED verde (0 para apagado e 1 para aceso), **AZUL:** ilustra o estado atual do LED azul (0 para apagado e 1 para aceso) e **LETRA:** ilustra o último caractere recebido como entrada.
 
 ### 8. Modo de gravação (recurso extra)
 

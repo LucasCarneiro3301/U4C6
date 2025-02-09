@@ -74,7 +74,7 @@ O programa implementa tratamento de boucing (via software). Dessa forma, evita l
 
 ### 6. Modificação da Biblioteca font.h
 
-Foi adicionado padrões para as letras mínusculas na biblioteca `font.h`. Além disso, também foi adicionado o caractere ':' (dois pontos).
+Foi adicionado padrões para as letras mínusculas na biblioteca `font.h`. Além disso, também foi adicionado os caracteres ':' (dois pontos) e '*' (asterisco).
 
 ### 7. Display SSD1306
 
@@ -85,6 +85,10 @@ Conectado via I2C, o display conta com a seguinte interface:
 </div>
 
 Em que **VERDE:** ilustra o estado atual do LED verde (0 para apagado e 1 para aceso), **AZUL:** ilustra o estado atual do LED azul (0 para apagado e 1 para aceso) e **LETRA:** ilustra o último caractere recebido como entrada.
+
+### 8. Modo de gravação (recurso extra)
+
+Caso o usuário escreva o caractere '*' no monitor serial, a programa será reiniciado para o modo de gravação.
 
 
 

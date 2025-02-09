@@ -62,7 +62,7 @@ Os LED verde e azul alternam de estado (aceso ou apagado) conforme cada botão. 
 
 ### 3. Entrada de caracteres via PC
 
-É possível receber caracteres (0-9, A-Z e a-z) como entrada via teclado do computador. O caractere recebido é ilustrado no _display_. Caso o caractere seja um número, este, além de aparecer no _display_, também é ilustrado na matriz de LEDs.
+É possível receber caracteres (0-9, A-Z, a-z, ':' e '*') como entrada via teclado do computador. O caractere recebido é ilustrado no _display_. Caso o caractere seja um número, este, além de aparecer no _display_, também é ilustrado na matriz de LEDs.
 
 ### 4. Interrupções
 
@@ -74,7 +74,7 @@ O programa implementa tratamento de boucing (via software). Dessa forma, evita l
 
 ### 6. Modificação da Biblioteca font.h
 
-Foi adicionado padrões para as letras mínusculas na biblioteca `font.h`. Além disso, também foi adicionado os caracteres ':' (dois pontos) e '*' (asterisco).
+Foi adicionado padrões para as letras mínusculas na biblioteca `font.h`. Além disso, também foram adicionados os caracteres ':' (dois pontos) e '*' (asterisco).
 
 ### 7. Display SSD1306
 

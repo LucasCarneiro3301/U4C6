@@ -35,6 +35,7 @@ static volatile uint32_t last_time = 0; // Armazena o tempo do último evento (e
 
 static void setup(); // Prototipação da função que define os LEDs RGB como saídas e os botões como entradas
 void i2c_setup(); // Prototipação da função que configura o I2C
+void clear(ssd1306_t* ssd); // Prototipação da função que limpa o display
 void ws2812_setup(PIO pio, uint sm); // Prototipação da função que configura a matriz de LEDs 5x5 
 void ssd1306_setup(ssd1306_t* ssd); // Prototipação da função que configura o display ssd1306
 void frame(ssd1306_t* ssd); // Prototipação da função que escreve a interface fixa no display ssd1306  
@@ -45,6 +46,7 @@ int main() {
   ssd1306_t ssd; 
   PIO pio = pio0;
   int sm = 0;
+  bool isOff = true;
 
   stdio_init_all(); // Inicialização dos recursos de entrada e saída padrão
   setup(); // Inicialização e configuração dos LEDs e botões 
@@ -56,23 +58,33 @@ int main() {
   gpio_set_irq_enabled_with_callback(BTNB, GPIO_IRQ_EDGE_FALL, true, &gpio_irq_handler); //Callback de interrupção do Botão b
 
   while (true) {
-    frame(&ssd); // Gera a interface padrão no display
-    int symbol = getchar_timeout_us(50); // Recebe um caractere do teclado
-    if (symbol != PICO_ERROR_TIMEOUT) {
-      printf("O caractere digitado foi: %c\n\n", (char) symbol);
-      ssd1306_draw_char(&ssd, (char) symbol, 68, 28); // Insere o símbolo escolhido ao lado da seção "LETRA: "
+    if(stdio_usb_connected()) { // Certifica se a conexão USB está funcionando
+      if(!isOff) {clear(&ssd); isOff=true;}
 
-      if(symbol >= 48 && symbol <= 57) numbers(symbol - 48); // Caso o símbolo seja um número, este é ilustrado na matriz de LEDs 5x5
-      else set_leds_from_color(pio, sm, 0); // Caso contrário, a matriz de LEDs é limpada
+      frame(&ssd); // Gera a interface padrão no display
+      int symbol = getchar_timeout_us(50); // Recebe um caractere do teclado
+      if (symbol != PICO_ERROR_TIMEOUT) {
+        printf("O caractere digitado foi: %c\n\n", (char) symbol);
+        ssd1306_draw_char(&ssd, (char) symbol, 68, 28); // Insere o símbolo escolhido ao lado da seção "LETRA: "
+
+        if(symbol >= 48 && symbol <= 57) numbers(symbol - 48); // Caso o símbolo seja um número, este é ilustrado na matriz de LEDs 5x5
+        else set_leds_from_color(pio, sm, 0); // Caso contrário, a matriz de LEDs é limpada
+      }
+
+      ssd1306_send_data(&ssd); // Envia os dados para o display
+
+      if(symbol == '*') {
+        printf("Reiniciando para o modo de gravação!!!\n\n");
+        reset_usb_boot(0,0); // Modo de gravação
+      } 
+    } else { // Solicita a inicialização da conexão USB  
+      if(isOff) {clear(&ssd); isOff=false;}
+
+      ssd1306_draw_string(&ssd, "INICIE A", 24, 28); 
+      ssd1306_draw_string(&ssd, "CONEXAO USB", 18, 40);
+      ssd1306_send_data(&ssd); // Envia os dados para o display
     }
-
-    ssd1306_send_data(&ssd); // Envia os dados para o display
-
-    if(symbol == '*') {
-      printf("Reiniciando para o modo de gravação!!!\n\n");
-      reset_usb_boot(0,0); // Modo de gravação
-    } 
-
+    
     sleep_ms(10);
   }
 }
@@ -106,13 +118,18 @@ void i2c_setup() {
   gpio_pull_up(I2C_SCL); // Pull up para linha de clock
 }
 
+// Limpa o display
+void clear(ssd1306_t* ssd) {
+  ssd1306_fill(ssd, false); // Limpa o display. O display inicia com todos os pixels apagados.
+  ssd1306_send_data(ssd);
+}
+
 // Inicializa e configura o display
 void ssd1306_setup(ssd1306_t* ssd) {
   ssd1306_init(ssd, WIDTH, HEIGHT, false, endereco, I2C_PORT); // Inicializa o display
   ssd1306_config(ssd); // Configura o display
   ssd1306_send_data(ssd); // Envia os dados para o display
-  ssd1306_fill(ssd, false); // Limpa o display. O display inicia com todos os pixels apagados.
-  ssd1306_send_data(ssd);
+  clear(ssd);
 }
 
 // Inicializa e configura a matriz de LEDs 5x5 
